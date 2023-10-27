@@ -1,6 +1,7 @@
 package org.example.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +10,16 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Note {
     @Getter
-    private String id;
+    @Setter
+    private int id;
     @Getter
+    @Setter
     private String text;
     @Getter
+    @Setter
     private List<String> label;
     @Getter
+    @Setter
     private static List<Note> noteList = new ArrayList<>();
 
     public Note(String text, List<String> label) {
@@ -38,17 +43,19 @@ public class Note {
 
     @Override
     public String toString() {
-        return "Note{" +
-                "id=" + id +
-                ", text='" + text + '\'' +
-                ", label='" + label + '\'' +
-                '}';
+        String joinLabels = String
+                .join("}; ", label)
+                .replaceAll(" ", "{");
+        return "{" + id + "} # {" + text + "}\n{"             + joinLabels + "}\n \n=================== \n";
+
     }
     // ген id
-    private static AtomicLong idCounter = new AtomicLong();
+    private static final AtomicLong idCounter = new AtomicLong();
 
-    public static String createID()
+    public static Integer createID()
     {
-        return String.valueOf(idCounter.getAndIncrement());
+        return (int) idCounter.getAndIncrement();
+
     }
+
 }
