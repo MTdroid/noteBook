@@ -6,7 +6,10 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicLong;
+
+import static org.example.service.UserServiceImpl.GenerateID;
+
+
 
 public class Note {
     @Getter
@@ -23,7 +26,7 @@ public class Note {
     private static List<Note> noteList = new ArrayList<>();
 
     public Note(String text, List<String> label) {
-        this.id = createID();
+        this.id = GenerateID();
         this.text = text;
         this.label = label;
     }
@@ -46,16 +49,9 @@ public class Note {
         String joinLabels = String
                 .join("}; ", label)
                 .replaceAll(" ", "{");
-        return "{" + id + "} # {" + text + "}\n{"             + joinLabels + "}\n \n=================== \n";
+        return "{" + id + "} # {" + text + "}\n{" + joinLabels + "}\n \n=================== \n";
 
     }
-    // ген id
-    private static final AtomicLong idCounter = new AtomicLong();
 
-    public static Integer createID()
-    {
-        return (int) idCounter.getAndIncrement();
-
-    }
 
 }

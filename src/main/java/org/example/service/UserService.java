@@ -7,9 +7,14 @@ import java.util.List;
 
 public interface UserService {
     void noteHelp();
-    Note noteNew();
-    List<Note> noteGetAllNotes();
+
+    Note createNewNote();
+
+    List<Note> GetAllNotes();
+
     void noteRemove();
+
     void noteExport() throws IOException;
-    void start() throws IOException;
+
+    void startNotebook() throws IOException;
 }

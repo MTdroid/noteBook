@@ -6,12 +6,15 @@ import java.io.IOException;
 import java.util.List;
 
 public interface UserDao {
-    void noteHelp();
-    Note noteNew();
-    List<Note> noteGetAllNotes();
-    void noteRemove();
-    void noteExport() throws IOException;
-    void start() throws IOException;
+
+
+    Note createNewNote(String text, List<String> label);
+
+    void GetAllNotes(List<Note> listNote);
+
+    void noteRemove(int id);
+
+    void noteExport(String link) throws IOException;
 
 
 }
