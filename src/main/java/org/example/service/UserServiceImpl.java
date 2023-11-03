@@ -17,6 +17,11 @@ public class UserServiceImpl implements UserService {
     private final UserDao daoNote = new UserDaoImpl();
     private static final AtomicLong idCounter = new AtomicLong();
 
+    public static Integer generateID() {
+        return (int) idCounter.getAndIncrement();
+
+    }
+
     @Override
     public void noteHelp() {
 
@@ -180,10 +185,5 @@ public class UserServiceImpl implements UserService {
                     log.warning("команда не найдена");
             }
         }
-    }
-
-    public static Integer generateID() {
-        return (int) idCounter.getAndIncrement();
-
     }
 }
