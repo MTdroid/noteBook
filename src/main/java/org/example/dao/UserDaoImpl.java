@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-    public void GetAllNotes(List<Note> listNote) {
+    public void getAllNotes(List<Note> listNote) {
         for (Note note : listNote) {
             log.info(String.valueOf(note));
 

@@ -69,7 +69,7 @@ public class TestNote {
 
         InputStream inputStream = new ByteArrayInputStream("ABAB".getBytes());
         System.setIn(inputStream);
-        assertEquals(1, userService.GetAllNotes().size());
+        assertEquals(1, userService.getAllNotes().size());
     }
 
     @Test
@@ -144,6 +144,6 @@ public class TestNote {
 
         InputStream inputStream = new ByteArrayInputStream(String.valueOf("\n ").getBytes());
         System.setIn(inputStream);
-        assertEquals(7, userService.GetAllNotes().size());
+        assertEquals(7, userService.getAllNotes().size());
     }
 }

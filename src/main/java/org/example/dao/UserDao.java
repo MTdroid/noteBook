@@ -10,7 +10,7 @@ public interface UserDao {
 
     Note createNewNote(String text, List<String> label);
 
-    void GetAllNotes(List<Note> listNote);
+    void getAllNotes(List<Note> listNote);
 
     void noteRemove(int id);
 

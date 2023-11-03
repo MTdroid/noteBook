@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static org.example.service.UserServiceImpl.GenerateID;
+import static org.example.service.UserServiceImpl.generateID;
 
 
 @Getter
@@ -22,7 +22,7 @@ public class Note {
     private static List<Note> noteList = new ArrayList<>();
 
     public Note(String text, List<String> label) {
-        this.id = GenerateID();
+        this.id = generateID();
         this.text = text;
         this.label = label;
     }

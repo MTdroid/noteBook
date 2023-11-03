@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class UserServiceImpl implements UserService {
     private final UserDao daoNote = new UserDaoImpl();
+    private static final AtomicLong idCounter = new AtomicLong();
 
     @Override
     public void noteHelp() {
@@ -81,7 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Note> GetAllNotes() {
+    public List<Note> getAllNotes() {
 
         log.info("вызвана команда note-list");
         log.info("Введите метки, чтобы отобразить определенные заметки или оставьте пустым для отображения всех заметок");
@@ -92,14 +93,14 @@ public class UserServiceImpl implements UserService {
         if (Objects.equals(label, "")) {
 
             listNote.addAll(Note.getNoteList());
-            daoNote.GetAllNotes(listNote);
+            daoNote.getAllNotes(listNote);
             return listNote;
         } else {
-            return GetNotesByLabel(label);
+            return getNotesByLabel(label);
         }
     }
 
-    public List<Note> GetNotesByLabel(String label) {
+    public List<Note> getNotesByLabel(String label) {
         List<Note> listNote = new ArrayList<>();
         List<String> labels = List.of(label.toUpperCase().split(" "));
         for (Note note : Note.getNoteList()) {
@@ -110,12 +111,8 @@ public class UserServiceImpl implements UserService {
                 } else {
                     log.info("Введите существующий label или оставьте поле пустым. Вы ввели - " + label);
                 }
-            }
-        }
-        daoNote.GetAllNotes(listNote);
-        {
-
-        }
+            }}
+        daoNote.getAllNotes(listNote);
         return listNote;
     }
 
@@ -155,7 +152,6 @@ public class UserServiceImpl implements UserService {
 
     }
 
-
     public void startNotebook() throws IOException {
         log.info("Это Ваша записная книжка. Вот список доступных команд: help, note-new, note-list, note-remove, note-export, exit.");
         Scanner scanner = new Scanner(System.in);
@@ -175,7 +171,7 @@ public class UserServiceImpl implements UserService {
                     noteExport();
                     continue;
                 case "note-list":
-                    GetAllNotes();
+                    getAllNotes();
                     continue;
                 case "exit":
                     log.info("вызвана команда exit");
@@ -186,9 +182,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private static final AtomicLong idCounter = new AtomicLong();
-
-    public static Integer GenerateID() {
+    public static Integer generateID() {
         return (int) idCounter.getAndIncrement();
 
     }

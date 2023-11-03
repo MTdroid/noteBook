@@ -10,7 +10,7 @@ public interface UserService {
 
     Note createNewNote();
 
-    List<Note> GetAllNotes();
+    List<Note> getAllNotes();
 
     void noteRemove();
 
