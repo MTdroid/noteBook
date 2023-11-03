@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao {
     public void GetAllNotes(List<Note> listNote) {
         for (Note note : listNote) {
             log.info(String.valueOf(note));
-            ;
+
         }
     }
 
@@ -39,8 +39,7 @@ public class UserDaoImpl implements UserDao {
                 Note note = iterator.next();
                 if (note.getId() == id) {
                     iterator.remove();
-                } else {
-                    log.info("заметка не найдена");
+                    log.info("Заметка с id - "+id+" удалена");
                 }
             } catch (IllegalArgumentException e) {
                 log.info("заметка не найдена");

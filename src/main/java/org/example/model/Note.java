@@ -10,19 +10,15 @@ import java.util.Objects;
 import static org.example.service.UserServiceImpl.GenerateID;
 
 
-
+@Getter
+@Setter
 public class Note {
-    @Getter
-    @Setter
+
     private int id;
-    @Getter
-    @Setter
     private String text;
-    @Getter
-    @Setter
     private List<String> label;
+
     @Getter
-    @Setter
     private static List<Note> noteList = new ArrayList<>();
 
     public Note(String text, List<String> label) {

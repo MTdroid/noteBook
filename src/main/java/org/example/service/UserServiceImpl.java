@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
         Scanner scanner = new Scanner(System.in);
         log.info("Введите заметку");
         String text = scanner.nextLine();
+        Note note = null;
         try {
             textVerification(text);
             log.info("Добавить метки? Метки состоят из одного слова и могу содержать только буквы.\nДля добавления нескольких меток разделяйте слова пробелом.");
@@ -45,13 +46,15 @@ public class UserServiceImpl implements UserService {
             List<String> labelSplit = List.of(labelInput.toUpperCase().split(" "));
             labelVerification(labelSplit);
 
-            Note note = daoNote.createNewNote(text, labelSplit);
+            note = daoNote.createNewNote(text, labelSplit);
             log.info("Заметка успешно добавлена\n" + note);
-            return note;
+
+
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
-        return null;
+
+        return note;
     }
 
     public static void labelVerification(List<String> labelSplit) throws IllegalArgumentException {
@@ -69,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
     public static void textVerification(String text) throws IllegalArgumentException {
         if (text.length() > 3) {
-            return;
+            log.fine("текст >3 символов");
         } else {
             log.info("текст заметки должен быть длиннее 3 символов, вы ввели - " + text);
             throw new IllegalArgumentException("");
@@ -124,7 +127,6 @@ public class UserServiceImpl implements UserService {
         String idRemove = scanner.nextLine();
 
         try {
-
             daoNote.noteRemove(Integer.parseInt(idRemove));
 
         } catch (NumberFormatException | NoSuchElementException e) {
